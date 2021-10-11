@@ -1,11 +1,12 @@
 package com.juanchaparro.opensearch.document;
 
+import com.juanchaparro.opensearch.helper.Indices;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 
-@Document(indexName = "person")
+@Document(indexName = Indices.PERSON_INDEX)
 public class Person {
 
     @Id
