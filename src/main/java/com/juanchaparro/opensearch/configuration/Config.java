@@ -44,16 +44,15 @@ public class Config {
     @Bean
     public RestHighLevelClient openSearchClient() {
         logger.info("Connecting to domain {}...", osDomainName);
-        CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
+        return new RestHighLevelClient(getRestClient());
+    }
 
+    private RestClientBuilder getRestClient() {
+        CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
         credentialsProvider.setCredentials(AuthScope.ANY, new UsernamePasswordCredentials(osUsername, osPassword));
 
-        RestClientBuilder builder = RestClient.builder(new HttpHost(osHost, osPort, osProtocol))
-                        .setHttpClientConfigCallback((httpClientBuilder) ->
-                        httpClientBuilder.setDefaultCredentialsProvider(credentialsProvider)
-                );
-
-        return new RestHighLevelClient(builder);
+        return RestClient.builder(new HttpHost(osHost, osPort, osProtocol))
+                .setHttpClientConfigCallback(cb -> cb.setDefaultCredentialsProvider(credentialsProvider));
     }
 
 }
