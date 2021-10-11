@@ -14,7 +14,6 @@ repositories {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.opensearch.client:opensearch-rest-high-level-client:1.1.0'
 	implementation 'org.springframework.boot:spring-boot-starter-data-elasticsearch'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }

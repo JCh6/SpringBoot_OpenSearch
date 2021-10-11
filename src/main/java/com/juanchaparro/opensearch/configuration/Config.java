@@ -6,16 +6,20 @@ import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.CredentialsProvider;
 import org.apache.http.impl.client.BasicCredentialsProvider;
-import org.opensearch.client.RestClient;
-import org.opensearch.client.RestClientBuilder;
-import org.opensearch.client.RestHighLevelClient;
+import org.elasticsearch.client.RestClient;
+import org.elasticsearch.client.RestClientBuilder;
+import org.elasticsearch.client.RestHighLevelClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
 
 @Configuration
+@EnableElasticsearchRepositories(basePackages = "com.juanchaparro.opensearch.repository")
+@ComponentScan(basePackages = {"com.juanchaparro.opensearch"})
 public class Config {
 
     Logger logger = LoggerFactory.getLogger(Config.class);
@@ -44,10 +48,10 @@ public class Config {
     @Bean
     public RestHighLevelClient openSearchClient() {
         logger.info("Connecting to domain {}...", osDomainName);
-        return new RestHighLevelClient(getRestClient());
+        return new RestHighLevelClient(getRestClientBuilder());
     }
 
-    private RestClientBuilder getRestClient() {
+    private RestClientBuilder getRestClientBuilder() {
         CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
         credentialsProvider.setCredentials(AuthScope.ANY, new UsernamePasswordCredentials(osUsername, osPassword));
 
