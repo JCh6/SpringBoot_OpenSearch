@@ -14,8 +14,8 @@ repositories {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation group: 'com.amazonaws', name: 'aws-java-sdk', version: '1.12.84'
 	implementation 'org.opensearch.client:opensearch-rest-high-level-client:1.1.0'
+	implementation 'org.springframework.boot:spring-boot-starter-data-elasticsearch'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
