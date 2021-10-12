@@ -53,7 +53,7 @@ public class VehicleService {
                     RequestOptions.DEFAULT
             );
 
-            if(documentFields == null) return null;
+            if(documentFields == null || documentFields.isSourceEmpty()) return null;
 
             return MAPPER.readValue(documentFields.getSourceAsString(), Vehicle.class);
         } catch (final Exception e) {
